@@ -17,6 +17,7 @@ class WrappedLabel(Label):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.halign = 'center'
+        self.font_size  = '16sp'
         self.bind(
             width=lambda *x:
             self.setter('text_size')(self, (self.width, None)),
@@ -46,19 +47,22 @@ class SelectPlayer(Popup):
         self.referencia.inicio_juego()
 
     def selection2(self):
-        self.referencia.player2 = NPCSmith('adamsmith.jpg',
-                                           ['frase 1',
-                                            'frase 2',
-                                            'frase 3'])
+        self.referencia.player2 = NPCMurray('rothbard.jpg',
+                                           ['''El Estado obtiene su renta mediante el uso de la compulsión, es decir,\
+ la amenaza de la cárcel y la bayoneta''',
+                                            '''Si los humanos son tan malos, ¿cómo podemos esperar que un gobierno\
+ coercitivo, compuesto por humanos, mejore la situación?''',
+                                            '''La contribución es, pura y simplemente, un robo, un robo a grande\
+ y colosal escala'''])
         self.dismiss()
         self.referencia.inicio_juego()
 
     def selection3(self):
         self.referencia.player2 = NPCMarx('karlmarx.jpg',
-                                          ['''Espero trates bien a tus trabajadores, no te quiero ver extrayendo 
- plusvalía''',
-                                           'frase 999',
-                                           'frase 3'])
+                                          ['¡Proletarios de todos los países, uníos!',
+                                           '''La historia de todas las sociedades hasta el día de hoy es historia\
+ de luchas de clases''',
+                                           '¡De cada cual según sus capacidades, a cada cual según sus necesidades!'])
         self.dismiss()
         self.referencia.inicio_juego()
 
@@ -158,7 +162,7 @@ class JugarVentana(VentanaLayout):
         self.narrativa = ''
         self.demanda_mercado = ''
         self.costes_totales = ''
-        NPCSmith.tax = 0
+        NPCMurray.tax = 0
 
     def evento_aleatorio(self):
         # Selección aleatoria del evento y la cuantía
@@ -180,13 +184,13 @@ class JugarVentana(VentanaLayout):
 
         elif self.evento == 3:
             self.c = self.c + cuantia
-            NPCSmith.tax = NPCSmith.tax - cuantia
+            NPCMurray.tax = NPCMurray.tax - cuantia
             self.narrativa = f'''El Gobierno introdujo un impuesto de {cuantia} u.m. sobre la producción.\
  El aumento aumento de costes asociado se ha introducido en tu función de costes.'''
 
         elif self.evento == 4:
             self.c = self.c - cuantia
-            NPCSmith.tax = NPCSmith.tax + cuantia
+            NPCMurray.tax = NPCMurray.tax + cuantia
             self.narrativa = f'''El Gobierno introdujo una subvención de {cuantia} u.m. por cada unidad producida.\
  Los cambios se han introducido en tu función de costes.'''
 
@@ -291,35 +295,35 @@ class NPCNash:
         return c
 
 
-class NPCSmith:
+class NPCMurray:
 
-    # Variable que (des)informará al NPCSmith sobre los impuestos del Gobierno
+    # Variable que (des)informará al NPCMurray sobre los impuestos del Gobierno
     tax = 0
 
     def __init__(self, img, frases):
         self.img = img
         self.frases = frases
-        self.name = 'Adam Smith'
+        self.name = 'Murray Rothbard'
 
     # Cournot
     @staticmethod
     def cournot(a, b, c):
-        return (a - (c + NPCSmith.tax)) / (3 * b)
+        return (a - (c + NPCMurray.tax)) / (3 * b)
 
     # Líder
     @staticmethod
     def stackelberg1(a, b, c):
-        return (a - (c + NPCSmith.tax)) / (2 * b)
+        return (a - (c + NPCMurray.tax)) / (2 * b)
 
     # Seguidora
     @staticmethod
     def stackelberg2(a, b, c, x1):
-        return ((a - (c + NPCSmith.tax)) / (2 * b)) - (x1 / 2)
+        return ((a - (c + NPCMurray.tax)) / (2 * b)) - (x1 / 2)
 
     # Bertrand
     @staticmethod
     def bertrand(c):
-        return c + NPCSmith.tax
+        return c + NPCMurray.tax
 
 
 class NPCMarx:
@@ -356,20 +360,20 @@ class MasInfo(Screen):
  cambiando la facilidad con la que podrás obtener beneficios en cada periodo:
     - John Nash: siempre tomará las decisiones más adecuadas, teniendo en cuenta la teoría existente al respecto.
     
-    - Adam Smith: responderá generalmente de forma acertada pero tiene una debilidad: la intervención estatal.\
+    - Murray Rothbard: responderá generalmente de forma acertada pero tiene una debilidad: la intervención estatal.\
  Ignorará los impuestos establecidos y las subvenciones concedidas por el Gobierno. Lo ignorará de cara a su decisión\
  de producción, sin embargo, sus costes reales serán igual a los tuyos por lo que puedes aprovecharte de esta\
  circunstancia. Ten en cuenta que su desaprobación de la intervención estatal es permanente, por lo que “acumulará”\
- la ignorancia sobre las intervenciones pasadas, así que es recomendable ir apuntán-dolo para optimizar tus\
+ la ignorancia sobre las intervenciones pasadas, así que es recomendable ir apuntándolo para optimizar tus\
  decisiones, por ejemplo:
  
 CT = 10x
 Etapa 1:
 “El Gobierno introduce un impuesto sobre la producción de 2 u.m.”
-Adam Smith producirá como si siguiera teniendo CT = 10x, cuando en realidad sus costes son mayores (12x).
+Rothbard producirá como si siguiera teniendo CT = 10x, cuando en realidad sus costes son mayores (12x).
 Etapa 2:
 “El Gobierno concede una subvención sobre la producción de 4 u.m.”
-Adam Smith producirá como si siguiera teniendo CT = 10x (ignora tanto el impuesto del anterior periodo como la\
+Rothbard producirá como si siguiera teniendo CT = 10x (ignora tanto el impuesto del anterior periodo como la\
  subvención de este), cuando en realidad sus costes reales son de 8x.
     
     -Karl Marx: sobreestima sus costes con la intención de no extraer plus-valía de sus trabajadores. En concreto,\
@@ -380,7 +384,7 @@ Adam Smith producirá como si siguiera teniendo CT = 10x (ignora tanto el impues
 CT = 10x
 Karl Marx producirá como si tuviera CT = 12x . 
 
-Cabe recordar que el enfrentamiento con el ordenador no es siempre rigu-rosamente equitativo puesto que, a pesar de\
+Cabe recordar que el enfrentamiento con el ordenador no es siempre rigurosamente equitativo puesto que, a pesar de\
  tener los mismos costes totales en todo momento, en el modelo de Stackelberg el orden de entrada en el mercado\
  desequilibra la balanza (favorece a la empresa líder considerablemente).
 

@@ -157,6 +157,7 @@
                 WrappedLabel:
                     size_hint_y: None
                     height: self.texture_size[1]
+                    font_size: '14sp'
                     text: root.comentario
 
             # Historial
@@ -206,7 +207,7 @@
                     on_release: root.selection1()
 
                 Button:
-                    text: "Adam Smith"
+                    text: "Murray Rothbard"
                     on_release: root.selection2()
 
                 Button:
@@ -222,13 +223,13 @@
                 orientation: "vertical"
 
                 WrappedLabel:
-                    text: '(Difícil) Creador de la Teoría de Juegos y conceptos como "equilibrio de Nash". Jugador experimentado y con gran conocimiento que optimizará sus decisiones al máximo'
+                    text: 'Creador de la Teoría de Juegos y conceptos como "equilibrio de Nash". Jugador experimentado y con gran conocimiento que optimizará sus decisiones al máximo'
 
                 WrappedLabel:
-                    text: '(Medio) Considerado padre de la economía. Economista liberal que ignora las actuaciones del Gobierno pues las considera "ineficientes".'
+                    text: 'Considerado padre del anarcocapitalismo. Economista libertario que ignora las actuaciones del Gobierno pues las considera ilegítimas.'
 
                 WrappedLabel:
-                    text: '(Fácil) Uno de los filósofos más influyentes de la historia. Sobreestima sus costes un 20% pues no quiere extraer plusvalía de sus trabajadores'
+                    text: 'Uno de los filósofos más influyentes de la historia. Sobreestima sus costes un 20% pues no quiere extraer plusvalía de sus trabajadores'
 
 
 <ResetGame>:
@@ -335,3 +336,6 @@
             Button:
                 text: 'Menú Principal'
                 on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
+
+<Button>:
+    font_size: '18sp'
