@@ -276,31 +276,6 @@
                     root.dismiss()
 
 
-<JugarMasInfoScreen>:
-    name: 'JugarMasInfoScreen'
-
-    Scroll:
-        GridLayout:
-            cols: 1
-            size_hint_y: None
-            height: self.minimum_height + 100
-            spacing: '10dp'
-
-            WrappedLabel:
-                size_hint_x: 1.6
-                size_hint_y: None
-                halign: 'center'
-                bold: True
-                text: 'JUGAR vs NPC'
-
-            WrappedLabel:
-                size_hint_y: None
-                height: self.texture_size[1]
-                halign: 'left'
-                text: root.a
-                bold: True
-
-
 <VentanaLayout>:
     canvas.before:
         Color:
@@ -319,8 +294,43 @@
             on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
 
 
-<MasInfo@Screen>:
+# Clase básica para las ventanas de más información
+<Scroll@ScrollView>:
+    pos_hint: {'top': 1}
+
+    canvas.before:
+        Color:
+            rgba: mainbtcolor
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<MasInfo>:
     name: 'MasInfo'
-    Button:
-        text: 'Volver'
-        on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
+
+    Scroll:
+        GridLayout:
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height + 100
+
+            WrappedLabel:
+                padding: ('10dp', '10dp')
+                size_hint_x: 1.6
+                size_hint_y: None
+                halign: 'center'
+                bold: True
+                text: 'JUGAR vs NPC'
+
+            WrappedLabel:
+                padding: ('10dp', '10dp')
+                size_hint_y: None
+                height: self.texture_size[1]
+                halign: 'justify'
+                text: root.a
+                bold: True
+
+            Button:
+                text: 'Menú Principal'
+                on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'

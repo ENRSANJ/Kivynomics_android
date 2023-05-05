@@ -263,9 +263,6 @@ class JugarVentana(VentanaLayout):
             self.evento_aleatorio()
             self.selecciona_modelo()
 
-    def obtenermasinfo(self):
-        self.manager.current = 'JugarMasInfoScreen'
-
 
 class NPCNash:
     def __init__(self, img, frases):
@@ -352,8 +349,45 @@ class NPCMarx:
         return 1.2*c
 
 
-class JugarMasInfoScreen(Screen):
-    a = '''El juego consiste en 3 etapas en las que tú, dueño de una empresa, competirás con uno de los tres NPCs'''
+class MasInfo(Screen):
+
+    a = '''El juego consiste en 3 etapas en las que tú, dueño de una empresa, com-petirás con uno de los tres NPCs\
+ disponibles, dueño de la empresa rival. Cada uno de estos jugadores tiene un comportamiento predefinido distinto,\
+ cambiando la facilidad con la que podrás obtener beneficios en cada periodo:
+    - John Nash: siempre tomará las decisiones más adecuadas, teniendo en cuenta la teoría existente al respecto.
+    
+    - Adam Smith: responderá generalmente de forma acertada pero tiene una debilidad: la intervención estatal.\
+ Ignorará los impuestos establecidos y las subvenciones concedidas por el Gobierno. Lo ignorará de cara a su decisión\
+ de producción, sin embargo, sus costes reales serán igual a los tuyos por lo que puedes aprovecharte de esta\
+ circunstancia. Ten en cuenta que su desaprobación de la intervención estatal es permanente, por lo que “acumulará”\
+ la ignorancia sobre las intervenciones pasadas, así que es recomendable ir apuntán-dolo para optimizar tus\
+ decisiones, por ejemplo:
+ 
+CT = 10x
+Etapa 1:
+“El Gobierno introduce un impuesto sobre la producción de 2 u.m.”
+Adam Smith producirá como si siguiera teniendo CT = 10x, cuando en realidad sus costes son mayores (12x).
+Etapa 2:
+“El Gobierno concede una subvención sobre la producción de 4 u.m.”
+Adam Smith producirá como si siguiera teniendo CT = 10x (ignora tanto el impuesto del anterior periodo como la\
+ subvención de este), cuando en realidad sus costes reales son de 8x.
+    
+    -Karl Marx: sobreestima sus costes con la intención de no extraer plus-valía de sus trabajadores. En concreto,\
+ producirá como si tuviera unos costes un 20% mayores a los reales. En este caso, el NPC tiene en cuenta todos los\
+ eventos que sucedan. Además, ese 20% no es acumulativo, es decir, en cada periodo actuará como si sus costes fueran\
+ un 20% superiores a los tuyos para ese mismo periodo:
+
+CT = 10x
+Karl Marx producirá como si tuviera CT = 12x . 
+
+Cabe recordar que el enfrentamiento con el ordenador no es siempre rigu-rosamente equitativo puesto que, a pesar de\
+ tener los mismos costes totales en todo momento, en el modelo de Stackelberg el orden de entrada en el mercado\
+ desequilibra la balanza (favorece a la empresa líder considerablemente).
+
+A lo largo del juego deberás decidir la cantidad a producir (modelos de Cournot y Stackelberg) o el precio que vas\
+ a establecer (modelo de Bertrand) teniendo en cuenta la personalidad del NPC, el modelo a tratar en la etapa y, por\
+ supuesto, las funciones de demanda del mercado y costes totales.
+'''
 
 
 class Manager(ScreenManager):
