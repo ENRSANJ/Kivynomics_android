@@ -1,0 +1,353 @@
+# Colores estándar de la aplicación (bt: botones, bg: background)
+#:set mainbtcolor (0, 0, .19, 1)
+#:set mainbgcolor (0, .35, .5, 1)
+#:set secondarybgcolor (0, 0, .19, 1)
+#:set secondarybtcolor (0, .35, .5, 1)
+#:set mainbttextcolor (1, 1, 1, 1)
+
+
+<Manager>:
+    MenuPrincipal:
+        name: 'MenuPrincipal'
+        canvas.before:
+            Color:
+                rgba: mainbgcolor
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        BoxLayout:
+            orientation: 'vertical'
+            padding: '10dp'
+            spacing: '10dp'
+
+            WrappedLabel:
+                pos_hint: {'center_x': .5}
+                font_size: 100
+                halign: 'center'
+                valign: 'middle'
+                markup: True
+                text: '[b]Kivynomics[/b]'
+                color: (1, 1, 1, 1)
+
+            Button:
+                size_hint: (.4, .4)
+                pos_hint: {'center_x': .5}
+                text: 'Iniciar juego'
+                on_release: root.transition.direction= 'left'; root.current = 'JugarScreen'
+
+            Button:
+                size_hint: (.25, .25)
+                pos_hint: {'center_x': .5}
+                text: '+ información'
+                on_release: root.transition.direction= 'left'; root.current = 'MasInfo'
+
+    JugarVentana:
+        id: jugarid
+
+    MasInfo:
+
+
+
+<JugarVentana>:
+    name: 'JugarScreen'
+
+    # BoxLayout con ttodo el contenido de la pantalla
+    BoxLayout:
+        padding: '5dp'
+        spacing: '5dp'
+        canvas.before:
+            Color:
+                rgba: mainbgcolor
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Parte izquierda de la pantalla
+        BoxLayout:
+            orientation: 'vertical'
+            padding: '10dp'
+            # Datos cuantitativos
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: (.55, .25)
+
+                canvas.before:
+                    Color:
+                        rgba: mainbtcolor
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+
+                # Función de demanda del mercado
+                WrappedLabel:
+                    text: 'Demanda del mercado: p(x) = ' + root.demanda_mercado
+
+                # Costes totales de la empresa del jugador
+                WrappedLabel:
+                    text: 'Costes totales: ' + root.costes_totales
+
+            # Narrativa del juego
+            BoxLayout:
+                orientation: 'vertical'
+
+                WrappedLabel:
+                    size_hint: (.5, .5)
+                    text: 'Etapa: ' + str(root.stage)
+
+                WrappedLabel:
+                    text: root.modelo
+
+                WrappedLabel:
+                    text: root.narrativa
+
+            # Tu decisión
+            BoxLayout:
+                padding: '10dp'
+                size_hint: (.8, .15)
+                canvas.before:
+                    Color:
+                        rgba: mainbtcolor
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+
+                WrappedLabel:
+                    text: 'Tu decisión: '
+
+                TextInput:
+                    id: respuesta
+                    size_hint: (.5, 1)
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+
+                WrappedLabel:
+                    text: '   uds/€'
+                    halign: 'left'
+
+                Button:
+                    text: 'Confirmar'
+                    on_release: root.confirma()
+                    canvas.before:
+                        Color:
+                            rgba: secondarybtcolor
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+
+        # Parte derecha de la pantalla
+        BoxLayout:
+            padding: '5dp'
+
+            size_hint: (.43, .9)
+            pos_hint: {'top': 1}
+            orientation: 'vertical'
+            canvas.before:
+                Color:
+                    rgba: mainbtcolor
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+
+            # NPC
+            BoxLayout:
+                padding: '5dp'
+                orientation: 'vertical'
+
+                size_hint: (.8, .7)
+                pos_hint: {'center_x': .5}
+
+                Image:
+                    source: root.imagen
+
+                # Comentario del NPC
+                WrappedLabel:
+                    size_hint: (1, .4)
+                    text: root.comentario
+
+            # Historial
+            BoxLayout:
+                orientation: 'vertical'
+
+                WrappedLabel:
+                    text: 'HISTORIAL'
+
+                WrappedLabel:
+                    text: root.stage1
+
+                WrappedLabel:
+                    text: root.stage2
+
+                WrappedLabel:
+                    text: root.stage3
+
+
+<SelectPlayer>:
+    size_hint: (.65, .8)
+    auto_dismiss: False
+
+    BoxLayout:
+        padding: '5dp'
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: mainbtcolor
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+
+        # Título
+        BoxLayout:
+            size_hint: (1, .2)
+            WrappedLabel:
+                text: '[u]Selecciona tu rival[/u]'
+                markup: True
+
+        BoxLayout:
+
+            # Botones de selección de NPC
+            BoxLayout:
+                size_hint: (.8, 1)
+                orientation: "vertical"
+                spacing: '10dp'
+                padding: '5dp'
+
+                Button:
+                    text: "John Forbes Nash"
+                    on_release: root.selection1()
+
+                Button:
+                    text: "Adam Smith"
+                    on_release: root.selection2()
+
+                Button:
+                    text: "Karl Marx"
+                    on_release: root.selection3()
+
+            # Separador
+            BoxLayout:
+                size_hint: (.1, 1)
+
+            # Información sobre NPC
+            BoxLayout:
+                orientation: "vertical"
+
+                WrappedLabel:
+                    text: '(Difícil) Creador de la Teoría de Juegos y conceptos como "equilibrio de Nash". Jugador experimentado y con gran conocimiento que optimizará sus decisiones al máximo'
+
+                WrappedLabel:
+                    text: '(Medio) Considerado padre de la economía. Economista liberal que ignora las actuaciones del Gobierno pues las considera "ineficientes".'
+
+                WrappedLabel:
+                    text: '(Fácil) Uno de los filósofos más influyentes de la historia. Sobreestima sus costes un 20% pues no quiere extraer plusvalía de sus trabajadores'
+
+
+<ResetGame>:
+    size_hint: (.4, .8)
+    auto_dismiss: False
+
+    BoxLayout:
+        padding: '5dp'
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: mainbtcolor
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+
+        # Título
+        BoxLayout:
+            size_hint: (1, .2)
+            WrappedLabel:
+                text: '[u]El juego ha finalizado[/u]'
+                markup: True
+
+
+        # Selección de acción al terminar la partida
+        BoxLayout:
+            orientation: "vertical"
+            spacing: '10dp'
+            padding: '5dp'
+
+            Button:
+                text: 'Volver a jugar'
+                on_release:
+                    app.root.ids.jugarid.reset_parametros()
+                    app.root.ids.jugarid.on_enter()
+                    root.dismiss()
+
+            Button:
+                text: 'Menú principal'
+                on_release:
+                    app.root.ids.jugarid.reset_parametros()
+                    app.root.transition.direction = 'right'
+                    app.root.current = 'MenuPrincipal'
+                    root.dismiss()
+
+            Button:
+                text: 'Exportar resultados'
+                on_release:
+                    root.exportar_resultados()
+                    app.root.ids.jugarid.reset_parametros()
+                    app.root.transition.direction = 'right'
+                    app.root.current = 'MenuPrincipal'
+                    root.dismiss()
+
+
+
+<JugarMasInfoScreen>:
+    name: 'JugarMasInfoScreen'
+
+    Scroll:
+        GridLayout:
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height + 100
+            spacing: '10dp'
+
+            WrappedLabel:
+                size_hint_x: 1.6
+                size_hint_y: None
+                halign: 'center'
+                bold: True
+                text: 'JUGAR vs NPC'
+
+            WrappedLabel:
+                size_hint_y: None
+                height: self.texture_size[1]
+                halign: 'left'
+                text: root.a
+                bold: True
+
+
+<VentanaLayout>:
+    canvas.before:
+        Color:
+            rgba: mainbgcolor
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    BoxLayout:
+        spacing: '10dp'
+        size_hint: (.2, .1)
+        pos_hint: {'right': 1}
+        padding: '10dp'
+
+        Button:
+            text: 'Menú Principal'
+            on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
+
+
+<WrappedLabel>:
+    font_size: 16
+
+
+<MasInfo@Screen>:
+    name: 'MasInfo'
+    Button:
+        text: 'Volver'
+        on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
+
+
+<Button>:
+    font_size: 18
