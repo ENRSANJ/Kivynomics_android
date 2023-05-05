@@ -5,8 +5,11 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.label import Label
 import random
+from kivy.core.window import Window
+
 
 Builder.load_file('main.kv')
+Window.softinput_mode = 'below_target'
 
 
 # Clase para las etiquetas de texto ajustadas a su tamaño (wrapped)

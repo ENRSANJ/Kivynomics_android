@@ -104,7 +104,7 @@
             # Tu decisión
             BoxLayout:
                 padding: '10dp'
-                size_hint: (.8, .15)
+                size_hint: (.8, .2)
                 canvas.before:
                     Color:
                         rgba: mainbtcolor
@@ -132,7 +132,7 @@
         BoxLayout:
             padding: '5dp'
 
-            size_hint: (.43, .9)
+            size_hint: (.43, .8)
             pos_hint: {'top': 1}
             orientation: 'vertical'
             canvas.before:
@@ -178,11 +178,11 @@
 <SelectPlayer>:
     size_hint: (.65, .8)
     auto_dismiss: False
+    title: 'Selecciona tu rival'
 
     BoxLayout:
         padding: '5dp'
         orientation: "vertical"
-        title: 'Selecciona tu rival'
 
         canvas.before:
             Color:
@@ -195,7 +195,7 @@
 
             # Botones de selección de NPC
             BoxLayout:
-                size_hint: (.8, 1)
+                size_hint: (.75, 1)
                 orientation: "vertical"
                 spacing: '10dp'
                 padding: '5dp'
@@ -231,7 +231,7 @@
 
 
 <ResetGame>:
-    size_hint: (.4, .8)
+    size_hint: (.65, .8)
     auto_dismiss: False
     title: 'El juego ha finalizado'
 
@@ -244,7 +244,6 @@
             RoundedRectangle:
                 size: self.size
                 pos: self.pos
-
 
         # Selección de acción al terminar la partida
         BoxLayout:
@@ -275,7 +274,6 @@
                     app.root.transition.direction = 'right'
                     app.root.current = 'MenuPrincipal'
                     root.dismiss()
-
 
 
 <JugarMasInfoScreen>:
@@ -312,7 +310,7 @@
             pos: self.pos
     BoxLayout:
         spacing: '10dp'
-        size_hint: (.2, .1)
+        size_hint: (.2, .15)
         pos_hint: {'right': 1}
         padding: '10dp'
 
@@ -321,16 +319,8 @@
             on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
 
 
-<WrappedLabel>:
-    font_size: 16
-
-
 <MasInfo@Screen>:
     name: 'MasInfo'
     Button:
         text: 'Volver'
         on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
-
-
-<Button>:
-    font_size: 18
