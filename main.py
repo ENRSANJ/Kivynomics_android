@@ -121,7 +121,7 @@ class JugarVentana(VentanaLayout):
         self.costes_totales = f'{self.c}x'
 
     def selecciona_modelo(self):
-        self.model = random.randint(1, 5)
+        self.model = random.randint(1, 4)
 
         # Cournot
         if self.model == 1:
@@ -159,7 +159,7 @@ class JugarVentana(VentanaLayout):
 
     def evento_aleatorio(self):
         # Selección aleatoria del evento y la cuantía
-        self.evento = random.randint(1, 5)
+        self.evento = random.randint(1, 4)
         cuantia = random.randint(3, 10)
 
         # Si el evento afecta a la demanda, modificamos la demanda (y viceversa)

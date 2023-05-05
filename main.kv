@@ -127,12 +127,6 @@
                 Button:
                     text: 'Confirmar'
                     on_release: root.confirma()
-                    canvas.before:
-                        Color:
-                            rgba: secondarybtcolor
-                        RoundedRectangle:
-                            pos: self.pos
-                            size: self.size
 
         # Parte derecha de la pantalla
         BoxLayout:
@@ -188,19 +182,14 @@
     BoxLayout:
         padding: '5dp'
         orientation: "vertical"
+        title: 'Selecciona tu rival'
+
         canvas.before:
             Color:
                 rgba: mainbtcolor
             RoundedRectangle:
                 size: self.size
                 pos: self.pos
-
-        # Título
-        BoxLayout:
-            size_hint: (1, .2)
-            WrappedLabel:
-                text: '[u]Selecciona tu rival[/u]'
-                markup: True
 
         BoxLayout:
 
@@ -244,6 +233,7 @@
 <ResetGame>:
     size_hint: (.4, .8)
     auto_dismiss: False
+    title: 'El juego ha finalizado'
 
     BoxLayout:
         padding: '5dp'
@@ -254,13 +244,6 @@
             RoundedRectangle:
                 size: self.size
                 pos: self.pos
-
-        # Título
-        BoxLayout:
-            size_hint: (1, .2)
-            WrappedLabel:
-                text: '[u]El juego ha finalizado[/u]'
-                markup: True
 
 
         # Selección de acción al terminar la partida
