@@ -56,7 +56,7 @@ class SelectPlayer(Popup):
     def selection3(self):
         self.referencia.player2 = NPCMarx('karlmarx.jpg',
                                           ['''Espero trates bien a tus trabajadores, no te quiero ver extrayendo 
-                                          plusvalía''',
+ plusvalía''',
                                            'frase 999',
                                            'frase 3'])
         self.dismiss()
