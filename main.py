@@ -57,9 +57,10 @@ class SelectPlayer(Popup):
 
     def selection1(self):
         self.referencia.player2 = NPCNash('johnnash.jpg',
-                                          ['Buen día, prepárese para reportar las pérdidas más cuantiosas de su vida',
-                                           'Llevo esperando este momento desde la salida de mi último libro',
-                                           'frase 3'])
+                                          ['Lo que distingue lo real de lo irreal está en el corazón',
+                                           '''Caballeros, debo recordarles que, mis probabilidades de éxito, aumentan\
+ en cada nuevo intento''',
+                                           'No, no creo en la suerte, pero sí en asignar valor a las cosas'])
         self.dismiss()
         self.referencia.inicio_juego()
 
@@ -372,7 +373,7 @@ class NPCMarx:
 
 class MasInfo(Screen):
 
-    a = '''El juego consiste en 3 etapas en las que tú, dueño de una empresa, com-petirás con uno de los tres NPCs\
+    a = '''El juego consiste en 3 etapas en las que tú, dueño de una empresa, comPetirás con uno de los tres NPCs\
  disponibles, dueño de la empresa rival. Cada uno de estos jugadores tiene un comportamiento predefinido distinto,\
  cambiando la facilidad con la que podrás obtener beneficios en cada periodo:
     - John Nash: siempre tomará las decisiones más adecuadas, teniendo en cuenta la teoría existente al respecto.
@@ -417,6 +418,7 @@ class Manager(ScreenManager):
 
 class kivynomics_for_android(App):
     def build(self):
+        Window.size = (3040/4, 1440/4)
         return Manager()
 
 
