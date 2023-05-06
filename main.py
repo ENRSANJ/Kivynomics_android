@@ -6,10 +6,27 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.label import Label
 import random
 from kivy.core.window import Window
+from kivy.uix.textinput import TextInput
 
 
 Builder.load_file('main.kv')
 Window.softinput_mode = 'below_target'
+
+
+# Clase que limita el formato de entrada de las respuestas en la app
+class GameInput(TextInput):
+    def insert_text(self, substring, from_undo=False):
+        if len(self.text) >= 5:
+            return
+        try:
+            if float(substring) < 0:
+                return
+        except ValueError:
+            if substring == "." and "." in self.text:
+                return
+            elif substring != ".":
+                return
+        super().insert_text(substring, from_undo=from_undo)
 
 
 # Clase para las etiquetas de texto ajustadas a su tamaño (wrapped)

@@ -115,10 +115,12 @@
                 WrappedLabel:
                     text: 'Tu decisión: '
 
-                TextInput:
+                GameInput:
                     id: respuesta
                     size_hint: (.5, 1)
                     pos_hint: {'center_x': .5, 'center_y': .5}
+                    on_text_validate: root.confirma()
+                    font_size: '16sp'
 
                 WrappedLabel:
                     text: '   uds/€'
@@ -131,7 +133,6 @@
         # Parte derecha de la pantalla
         BoxLayout:
             padding: '5dp'
-
             size_hint: (.43, .8)
             pos_hint: {'top': 1}
             orientation: 'vertical'
@@ -153,12 +154,12 @@
                 Image:
                     source: root.imagen
 
-                # Comentario del NPC
-                WrappedLabel:
-                    size_hint_y: None
-                    height: self.texture_size[1]
-                    font_size: '14sp'
-                    text: root.comentario
+            # Comentario del NPC
+            WrappedLabel:
+                size_hint_y: None
+                height: self.texture_size[1]
+                font_size: '14sp'
+                text: root.comentario
 
             # Historial
             BoxLayout:
@@ -233,7 +234,7 @@
 
 
 <ResetGame>:
-    size_hint: (.65, .8)
+    size_hint: (.4, .8)
     auto_dismiss: False
     title: 'El juego ha finalizado'
 
@@ -339,3 +340,10 @@
 
 <Button>:
     font_size: '18sp'
+
+
+<GameInput>:
+    multiline: False
+    write_tab: False
+    padding: [0, (self.height-self.line_height)/2]
+    halign: 'center'
