@@ -418,7 +418,6 @@ class Manager(ScreenManager):
 
 class kivynomics_for_android(App):
     def build(self):
-        Window.size = (3040/4, 1440/4)
         return Manager()
 
 
