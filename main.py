@@ -34,7 +34,7 @@ class WrappedLabel(Label):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.halign = 'center'
-        self.font_size  = '16sp'
+        self.font_size  = '14sp'
         self.bind(
             width=lambda *x:
             self.setter('text_size')(self, (self.width, None)),
