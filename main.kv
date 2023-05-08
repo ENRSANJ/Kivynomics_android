@@ -30,16 +30,17 @@
                 text: '[b]Kivynomics[/b]'
                 color: (1, 1, 1, 1)
 
-            Button:
-                size_hint: (.4, .4)
+            Boton:
+                size_hint: (.25, .25)
                 pos_hint: {'center_x': .5}
                 text: 'Iniciar juego'
                 on_release: root.transition.direction= 'left'; root.current = 'JugarScreen'
 
-            Button:
+            MDIconButton:
                 size_hint: (.25, .25)
                 pos_hint: {'center_x': .5}
-                text: '+ información'
+                icon: 'information-outline'
+                icon_size: '64sp'
                 on_release: root.transition.direction= 'left'; root.current = 'MasInfo'
 
     JugarVentana:
@@ -130,7 +131,7 @@
                     text: '   uds/€'
                     halign: 'left'
 
-                Button:
+                Boton2:
                     text: 'Confirmar'
                     on_release: root.confirma()
 
@@ -185,10 +186,9 @@
 <SelectPlayer>:
     size_hint: (.65, .8)
     auto_dismiss: False
-    title: 'Selecciona tu rival'
 
     BoxLayout:
-        padding: '5dp'
+        padding: ('5dp', 0, '15dp', 0)
         orientation: "vertical"
 
         canvas.before:
@@ -198,37 +198,41 @@
                 size: self.size
                 pos: self.pos
 
+        # Título
+        BoxLayout:
+            size_hint: (1, .1)
+            WrappedLabel:
+                text: '[u]Selecciona tu rival[/u]'
+                font_size: '16sp'
+                markup: True
+
         BoxLayout:
 
             # Botones de selección de NPC
             BoxLayout:
-                size_hint: (.75, 1)
+                size_hint: (.75, .95)
                 orientation: "vertical"
-                spacing: '10dp'
-                padding: '5dp'
+                spacing: '50dp'
+                padding: ('5dp', '5dp', '25dp', '20dp')
 
-                Button:
+                Boton2:
                     text: "John Forbes Nash"
                     on_release: root.selection1()
 
-                Button:
+                Boton2:
                     text: "Murray Rothbard"
                     on_release: root.selection2()
 
-                Button:
+                Boton2:
                     text: "Karl Marx"
                     on_release: root.selection3()
-
-            # Separador
-            BoxLayout:
-                size_hint: (.1, 1)
 
             # Información sobre NPC
             BoxLayout:
                 orientation: "vertical"
 
                 WrappedLabel:
-                    text: 'Creador de la Teoría de Juegos y conceptos como "equilibrio de Nash". Jugador experimentado y con gran conocimiento que optimizará sus decisiones al máximo'
+                    text: 'Creador de conceptos como "equilibrio de Nash" o "negociación de Nash". Jugador experimentado y con gran conocimiento que optimizará sus decisiones al máximo'
                     font_size: '13sp'
                     halign: 'justify'
                 WrappedLabel:
@@ -242,12 +246,12 @@
 
 
 <ResetGame>:
-    size_hint: (.4, .8)
+    size_hint: (.4, .5)
     auto_dismiss: False
-    title: 'El juego ha finalizado'
 
     BoxLayout:
-        padding: '5dp'
+        padding: '10dp'
+        spacing: '10dp'
         orientation: "vertical"
         canvas.before:
             Color:
@@ -256,20 +260,28 @@
                 size: self.size
                 pos: self.pos
 
+        # Título
+        BoxLayout:
+            size_hint: (1, .1)
+            WrappedLabel:
+                text: '[u]El juego ha finalizado[/u]'
+                font_size: '16sp'
+                markup: True
+
         # Selección de acción al terminar la partida
         BoxLayout:
             orientation: "vertical"
-            spacing: '10dp'
+            spacing: '15dp'
             padding: '5dp'
 
-            Button:
+            Boton2:
                 text: 'Volver a jugar'
                 on_release:
                     app.root.ids.jugarid.reset_parametros()
                     app.root.ids.jugarid.on_enter()
                     root.dismiss()
 
-            Button:
+            Boton2:
                 text: 'Menú principal'
                 on_release:
                     app.root.ids.jugarid.reset_parametros()
@@ -277,7 +289,7 @@
                     app.root.current = 'MenuPrincipal'
                     root.dismiss()
 
-            Button:
+            Boton2:
                 text: 'Exportar resultados'
                 on_release:
                     root.exportar_resultados()
@@ -300,13 +312,13 @@
         pos_hint: {'right': 1}
         padding: '10dp'
 
-        Button:
+        Boton:
             text: 'Reiniciar'
             on_release:
                 app.root.ids.jugarid.reset_parametros()
                 app.root.ids.jugarid.on_enter()
 
-        Button:
+        Boton:
             text: 'Menú Principal'
             on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
 
@@ -330,7 +342,8 @@
         GridLayout:
             cols: 1
             size_hint_y: None
-            height: self.minimum_height + 100
+            height: self.minimum_height
+            padding: ('10dp', '10dp', '10dp', '40dp')
 
             WrappedLabel:
                 padding: ('10dp', '10dp')
@@ -348,12 +361,10 @@
                 text: root.a
                 bold: True
 
-            Button:
+            Boton:
                 text: 'Menú Principal'
+                md_bg_color:secondarybtcolor
                 on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
-
-<Button>:
-    font_size: '16sp'
 
 
 <GameInput>:
@@ -361,3 +372,17 @@
     write_tab: False
     padding: [0, (self.height-self.line_height)/2]
     halign: 'center'
+
+
+# Botón personalizado que usaremos en la aplicación
+<Boton@MDFillRoundFlatButton>:
+    font_size: '16sp'
+    md_bg_color: mainbtcolor
+    pos_hint: {'center_x': .5}
+    size_hint: (1, 1)
+
+<Boton2@MDFillRoundFlatButton>:
+    font_size: '16sp'
+    md_bg_color:secondarybtcolor
+    pos_hint: {'center_x': .5}
+    size_hint: (1, 1)

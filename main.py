@@ -1,4 +1,4 @@
-from kivy.app import App
+from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.properties import StringProperty, NumericProperty
 from kivy.uix.popup import Popup
@@ -7,6 +7,7 @@ from kivy.uix.label import Label
 import random
 from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
+from kivymd.uix.dialog import MDDialog
 
 
 Builder.load_file('main.kv')
@@ -50,43 +51,43 @@ class MenuPrincipal(Screen):
     pass
 
 
-class SelectPlayer(Popup):
+class SelectPlayer(MDDialog):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.referencia = App.get_running_app().root.ids.jugarid
+        self.referencia = MDApp.get_running_app().root.ids.jugarid
 
     def selection1(self):
         self.referencia.player2 = NPCNash('johnnash.jpg',
-                                          ['Lo que distingue lo real de lo irreal está en el corazón',
-                                           '''Caballeros, debo recordarles que, mis probabilidades de éxito, aumentan\
- en cada nuevo intento''',
-                                           'No, no creo en la suerte, pero sí en asignar valor a las cosas'])
+                                          ['"Lo que distingue lo real de lo irreal está en el corazón"',
+                                           '''"Caballeros, debo recordarles que, mis probabilidades de éxito, aumentan\
+ en cada nuevo intento"''',
+                                           '"No, no creo en la suerte, pero sí en asignar valor a las cosas"'])
         self.dismiss()
         self.referencia.inicio_juego()
 
     def selection2(self):
         self.referencia.player2 = NPCMurray('rothbard.jpg',
-                                           ['''El Estado obtiene su renta mediante el uso de la compulsión, es decir,\
- la amenaza de la cárcel y la bayoneta''',
-                                            '''Si los humanos son tan malos, ¿cómo podemos esperar que un gobierno\
- coercitivo, compuesto por humanos, mejore la situación?''',
-                                            '''La contribución es, pura y simplemente, un robo, un robo a grande\
- y colosal escala'''])
+                                           ['''"El Estado obtiene su renta mediante el uso de la compulsión, es decir,\
+ la amenaza de la cárcel y la bayoneta"''',
+                                            '''"Si los humanos son tan malos, ¿cómo podemos esperar que un gobierno\
+ coercitivo, compuesto por humanos, mejore la situación?"''',
+                                            '''"La contribución es, pura y simplemente, un robo, un robo a grande\
+ y colosal escala"'''])
         self.dismiss()
         self.referencia.inicio_juego()
 
     def selection3(self):
         self.referencia.player2 = NPCMarx('karlmarx.jpg',
-                                          ['¡Proletarios de todos los países, uníos!',
-                                           '''La historia de todas las sociedades hasta el día de hoy es historia\
- de luchas de clases''',
-                                           '¡De cada cual según sus capacidades, a cada cual según sus necesidades!'])
+                                          ['"¡Proletarios de todos los países, uníos!"',
+                                           '''"La historia de todas las sociedades hasta el día de hoy es historia\
+ de luchas de clases"''',
+                                           '"¡De cada cual según sus capacidades, a cada cual según sus necesidades!"'])
         self.dismiss()
         self.referencia.inicio_juego()
 
 
-class ResetGame(Popup):
+class ResetGame(MDDialog):
 
     def exportar_resultados(self):
         pass
@@ -417,7 +418,7 @@ class Manager(ScreenManager):
     pass
 
 
-class kivynomics_for_android(App):
+class kivynomics_for_android(MDApp):
     def build(self):
         return Manager()
 
