@@ -42,9 +42,14 @@ class WrappedLabel(Label):
             texture_size=lambda *x: self.setter('height')(self, self.texture_size[1]))
 
 
-class VentanaLayout(Screen):
+class ConfirmationScreen(MDDialog):
     pass
 
+
+class VentanaLayout(Screen):
+    def confirmar(self):
+        dialog = ConfirmationScreen()
+        dialog.open()
 
 
 class MenuPrincipal(Screen):
@@ -158,11 +163,11 @@ class JugarVentana(VentanaLayout):
         # NPC Stackelberg líder
         elif self.model == 2:
             self.prod2 = round(self.player2.stackelberg1(self.a, self.b, self.c), 3)
-            self.modelo = f'MODELO DE NPC = LÍDER. {self.player2.name} produjo {self.prod2} unidades.'
+            self.modelo = f'MODELO DE STACKELBERG. TÚ ERES LA EMPRESA SEGUIDORA. {self.player2.name} produjo {self.prod2} unidades.'
 
         # NPC Stackelberg seguidor
         elif self.model == 3:
-            self.modelo = 'MODELO DE STACKELBERG NPC = SEGUIDOR'
+            self.modelo = 'MODELO DE STACKELBERG. TÚ ERES LA EMPRESA LÍDER'
 
         # Bertrand
         else:
@@ -271,7 +276,7 @@ class JugarVentana(VentanaLayout):
 
         stage_dict = {1: 'stage1', 2: 'stage2', 3: 'stage3'}
         stage_key = stage_dict.get(self.stage)
-        setattr(self, stage_key, f'Beneficio: {self.beneficio1}')
+        setattr(self, stage_key, f'Beneficio_{self.stage}: {self.beneficio1}')
 
         # Pasamos de etapa
         self.ids.respuesta.text = ''

@@ -19,7 +19,6 @@
         BoxLayout:
             orientation: 'vertical'
             padding: '10dp'
-            spacing: '10dp'
 
             WrappedLabel:
                 pos_hint: {'center_x': .5}
@@ -30,23 +29,32 @@
                 text: '[b]Kivynomics[/b]'
                 color: (1, 1, 1, 1)
 
-            Boton:
-                size_hint: (.25, .25)
+            MDIconButton:
+                size_hint: (.3, .3)
                 pos_hint: {'center_x': .5}
-                text: 'Iniciar juego'
+                icon: 'play-circle-outline'
+                icon_size: '150sp'
                 on_release: root.transition.direction= 'left'; root.current = 'JugarScreen'
 
-            MDIconButton:
-                size_hint: (.25, .25)
-                pos_hint: {'center_x': .5}
-                icon: 'information-outline'
-                icon_size: '64sp'
-                on_release: root.transition.direction= 'left'; root.current = 'MasInfo'
+            BoxLayout:
+                size_hint: (.3, .3)
+                pos_hint: {'right': 1}
+                MDIconButton:
+                    pos_hint: {'right': 1}
+                    icon: 'information-outline'
+                    on_release: root.transition.direction= 'left'; root.current = 'MasInfo'
+
+                MDIconButton:
+                    pos_hint: {'right': 1}
+                    icon: 'account'
+                    on_release: root.transition.direction= 'left'; root.current = 'About'
 
     JugarVentana:
         id: jugarid
 
     MasInfo:
+
+    About:
 
 
 
@@ -68,6 +76,7 @@
         BoxLayout:
             orientation: 'vertical'
             padding: '10dp'
+            spacing: '10dp'
 
             # Datos cuantitativos
             BoxLayout:
@@ -97,14 +106,32 @@
                 orientation: 'vertical'
 
                 WrappedLabel:
-                    size_hint: (.5, .5)
+                    canvas.before:
+                        Color:
+                            rgba: mainbtcolor
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                    size_hint: (.25, .25)
                     text: 'Etapa: ' + str(root.stage)
 
                 WrappedLabel:
-                    text: root.modelo
+                    text: root.narrativa
+                    canvas.before:
+                        Color:
+                            rgba: mainbtcolor
+                        Line:
+                            width: 2
+                            rectangle: (self.x, self.y, self.width, self.height)
 
                 WrappedLabel:
-                    text: root.narrativa
+                    text: root.modelo
+                    canvas.before:
+                        Color:
+                            rgba: mainbtcolor
+                        Line:
+                            width: 2
+                            rectangle: (self.x, self.y, self.width, self.height)
 
             # Tu decisión
             BoxLayout:
@@ -306,20 +333,19 @@
         Rectangle:
             size: self.size
             pos: self.pos
-    BoxLayout:
-        spacing: '10dp'
-        size_hint: (.4, .15)
+    MDBoxLayout:
+        size_hint: (.25, .1)
         pos_hint: {'right': 1}
         padding: '10dp'
+        spacing: '10dp'
 
-        Boton:
-            text: 'Reiniciar'
+        MDIconButton:
+            icon: 'refresh-circle'
             on_release:
-                app.root.ids.jugarid.reset_parametros()
-                app.root.ids.jugarid.on_enter()
+                root.confirmar()
 
-        Boton:
-            text: 'Menú Principal'
+        MDIconButton:
+            icon: 'home-circle'
             on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
 
 
@@ -352,6 +378,7 @@
                 halign: 'center'
                 bold: True
                 text: 'JUGAR vs NPC'
+                font_size: '30sp'
 
             WrappedLabel:
                 padding: ('10dp', '10dp')
@@ -364,6 +391,32 @@
             Boton:
                 text: 'Menú Principal'
                 md_bg_color:secondarybtcolor
+                on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
+
+
+<About@Screen>:
+    name: 'About'
+
+    canvas.before:
+        Color:
+            rgba: mainbgcolor
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    Scroll:
+        GridLayout:
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+            padding: ('10dp', '10dp', '10dp', '40dp')
+
+            Boton:
+                text: 'Github source code'
+
+            Boton:
+                size_hint: (.25, .15)
+                text: 'Menú Principal'
                 on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
 
 
@@ -386,3 +439,46 @@
     md_bg_color:secondarybtcolor
     pos_hint: {'center_x': .5}
     size_hint: (1, 1)
+
+
+# Botones con icono personalizados
+<MDIconButton>:
+    icon_size: '65sp'
+    theme_icon_color: "Custom"
+    icon_color: mainbtcolor
+
+# Pantalla de confirmación
+<ConfirmationScreen>:
+    size_hint: (.3, .2)
+    auto_dismiss: False
+    BoxLayout:
+        padding: '10dp'
+        spacing: '10dp'
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: mainbtcolor
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+        # Título
+        BoxLayout:
+            size_hint: (1, .1)
+            WrappedLabel:
+                text: '¿Desea reiniciar la partida?'
+                font_size: '16sp'
+                markup: True
+        # Selección de opción
+        BoxLayout:
+            padding: '15dp'
+            spacing: '10dp'
+            Boton2:
+                text: 'SÍ'
+                on_release:
+                    app.root.ids.jugarid.reset_parametros()
+                    app.root.ids.jugarid.on_enter()
+                    root.dismiss()
+            Boton2:
+                text: 'NO'
+                on_release:
+                    root.dismiss()
