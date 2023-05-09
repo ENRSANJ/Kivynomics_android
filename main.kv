@@ -452,9 +452,9 @@
     size_hint: (.3, .3)
     auto_dismiss: False
     BoxLayout:
-        padding: '10dp'
         spacing: '10dp'
-        orientation: "vertical"
+        padding: '10dp'
+        orientation: 'vertical'
         canvas.before:
             Color:
                 rgba: mainbtcolor
@@ -463,33 +463,31 @@
                 pos: self.pos
         # Título
         BoxLayout:
-            size_hint: (1, .1)
+            size_hint: (1, .2)
             WrappedLabel:
                 text: '¿Desea reiniciar la partida?'
-                font_size: '16sp'
-                markup: True
         # Selección de opción
-    AnchorLayout:
-        anchor_x: 'center'
-        anchor_y: 'bottom'
-        spacing: '10dp'
-        padding: '10dp'
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'bottom'
+            spacing: '10dp'
+            padding: '10dp'
 
-        BoxLayout:
-            orientation: 'horizontal'
-            size_hint: (None, None)
-            size: (self.minimum_width, self.minimum_height)
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: (None, None)
+                size: (self.minimum_width, self.minimum_height)
 
-            MDIconButton:
-                icon: 'check-circle-outline'
-                icon_color: app.theme_cls.primary_color
-                on_release:
-                    app.root.ids.jugarid.reset_parametros()
-                    app.root.ids.jugarid.on_enter()
-                    root.dismiss()
+                MDIconButton:
+                    icon: 'check-circle-outline'
+                    icon_color: app.theme_cls.primary_color
+                    on_release:
+                        app.root.ids.jugarid.reset_parametros()
+                        app.root.ids.jugarid.on_enter()
+                        root.dismiss()
 
-            MDIconButton:
-                icon: 'close-circle-outline'
-                icon_color: app.theme_cls.primary_color
-                on_release:
-                    root.dismiss()
+                MDIconButton:
+                    icon: 'close-circle-outline'
+                    icon_color: app.theme_cls.primary_color
+                    on_release:
+                        root.dismiss()
