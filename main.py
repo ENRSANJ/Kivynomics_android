@@ -380,7 +380,7 @@ class NPCMarx:
 
 class MasInfo(Screen):
 
-    a = '''El juego consiste en 3 etapas en las que tú, dueño de una empresa, comPetirás con uno de los tres NPCs\
+    a = '''El juego consiste en 3 etapas en las que tú, dueño de una empresa, competirás con uno de los tres NPCs\
  disponibles, dueño de la empresa rival. Cada uno de estos jugadores tiene un comportamiento predefinido distinto,\
  cambiando la facilidad con la que podrás obtener beneficios en cada periodo:
     - John Nash: siempre tomará las decisiones más adecuadas, teniendo en cuenta la teoría existente al respecto.
@@ -401,7 +401,7 @@ Etapa 2:
 Rothbard producirá como si siguiera teniendo CT = 10x (ignora tanto el impuesto del anterior periodo como la\
  subvención de este), cuando en realidad sus costes reales son de 8x.
     
-    -Karl Marx: sobreestima sus costes con la intención de no extraer plus-valía de sus trabajadores. En concreto,\
+    -Karl Marx: sobreestima sus costes con la intención de no extraer plusvalía de sus trabajadores. En concreto,\
  producirá como si tuviera unos costes un 20% mayores a los reales. En este caso, el NPC tiene en cuenta todos los\
  eventos que sucedan. Además, ese 20% no es acumulativo, es decir, en cada periodo actuará como si sus costes fueran\
  un 20% superiores a los tuyos para ese mismo periodo:
