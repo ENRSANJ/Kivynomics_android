@@ -1,8 +1,6 @@
 # Colores estándar de la aplicación (bt: botones, bg: background)
 #:set mainbtcolor (0, 0, .19, 1)
 #:set mainbgcolor (0, .35, .5, 1)
-#:set secondarybgcolor (0, 0, .19, 1)
-#:set secondarybtcolor (0, .35, .5, 1)
 #:set mainbttextcolor (1, 1, 1, 1)
 
 
@@ -390,34 +388,44 @@
 
             Boton:
                 text: 'Menú Principal'
-                md_bg_color:secondarybtcolor
+                md_bg_color: mainbgcolor
                 on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
 
 
-<About@Screen>:
+<About>:
     name: 'About'
 
-    canvas.before:
-        Color:
-            rgba: mainbgcolor
-        Rectangle:
-            size: self.size
-            pos: self.pos
+    GridLayout:
+        canvas.before:
+            Color:
+                rgba: mainbtcolor
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        cols: 1
+        padding: '10dp'
+        spacing: '10dp'
 
-    Scroll:
-        GridLayout:
-            cols: 1
-            size_hint_y: None
-            height: self.minimum_height
-            padding: ('10dp', '10dp', '10dp', '40dp')
-
-            Boton:
+        WrappedLabel:
+            size_hint: (1, 2.5)
+            bold: True
+            halign: 'justify'
+            text: root.a
+        BoxLayout:
+            spacing: '10dp'
+            Boton2:
+                text: 'Trabajo de Fin de Grado (texto completo)'
+                on_release:
+                    import webbrowser
+                    webbrowser.open('https://drive.google.com/drive/folders/1QooAmQHTVd8keyGHeqa_X5vMOSCjETG1?usp=sharing')
+            Boton2:
                 text: 'Github source code'
-
-            Boton:
-                size_hint: (.25, .15)
-                text: 'Menú Principal'
-                on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
+                on_release:
+                    import webbrowser
+                    webbrowser.open('https://github.com/ENRSANJ/Kivynomics.git')
+        Boton2:
+            text: 'Menú Principal'
+            on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
 
 
 <GameInput>:
@@ -436,7 +444,7 @@
 
 <Boton2@MDFillRoundFlatButton>:
     font_size: '16sp'
-    md_bg_color:secondarybtcolor
+    md_bg_color: mainbgcolor
     pos_hint: {'center_x': .5}
     size_hint: (1, 1)
 

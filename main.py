@@ -8,6 +8,7 @@ import random
 from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
 from kivymd.uix.dialog import MDDialog
+from kivymd.uix.datatables import MDDataTable
 
 
 Builder.load_file('main.kv')
@@ -95,7 +96,7 @@ class SelectPlayer(MDDialog):
 class ResetGame(MDDialog):
 
     def exportar_resultados(self):
-        pass
+        tabla = MDDataTable()
 
 
 class JugarVentana(VentanaLayout):
@@ -376,6 +377,19 @@ class NPCMarx:
     @staticmethod
     def bertrand(c):
         return 1.2*c
+
+
+class About(Screen):
+    a = '''Esta aplicación es parte de otra aplicación más grande, también desarrollada en Kivy pero orientada a\
+ ordenadores. Ambas son el resultado de un Trabajo de Tin de Grado en economía centrado\
+ en la teoría de juegos. La aplicación de escritorio implementa los modelos de teoría de juegos fundamentales\
+ en sus versiones más básicas, con el fin de ofrecer una aproximación accesible, comprensible y entretenida\
+ a la materia. Para más información sobre los modelos y su implementación concreta, puedes\
+ acceder al texto completo del TFG haciendo click sobre el botón correspondiente.
+ 
+
+Puedes acceder al código fuente de esta y la aplicación de escritorio en mi página de Github. Para cualquier\
+ problema, pregunta, sugerencia o aporte puedes contactarme a través de Github'''
 
 
 class MasInfo(Screen):
