@@ -112,22 +112,20 @@ class ResetGame(MDDialog):
 
         for key, value in historial.items():
             text_list = [
-                'ETAPA: ' + f'{key}',
-                'MODELO: ' + f'{value[0]}',
-                'Función de demanda del mercado: ' + f'p(X) = {value[1]} - {value[2]}X',
-                'CT_1: ' + f'{value[3]}x\u2081',
-                'CT_2: ' + f'{value[3]}x\u2082',
-                '',
-                'RESPUESTAS: ',
-                'Tu empresa (1): ',
+                '[b]ETAPA: ' + f'{key}[/b]',
+                '\n[u]MODELO:[/u] ' + f'{value[0]}',
+                '\n[u]Datos[/u]',
+                f'p(X) = {value[1]} - {value[2]}X',
+                'CT[sub]1[/sub]: ' + f'{value[3]}x[sub]1[/sub]',
+                'CT[sub]2[/sub]: ' + f'{value[3]}x[sub]2[/sub]',
+                '\n[u]RESPUESTAS:[/u] ',
+                '[u]Tu empresa:[/u] ',
                 'Producción: ' + f'{value[6]} uds',
                 'Beneficio: ' + f'{value[7]} €',
-                '',
-                'Empresa del NPC (2): ',
+                '\n[u]Empresa del NPC:[/u] ',
                 'Producción: ' + f'{value[8]} uds',
                 'Beneficio: ' + f'{value[9]} €',
-                '',
-                'Datos del mercado: ',
+                '\n[u]Datos del mercado:[/u] ',
                 'Precio: ' + f'{value[4]} €',
                 'Cantidad: ' + f'{value[5]} uds',
             ]
@@ -136,7 +134,7 @@ class ResetGame(MDDialog):
             grid2.bind(minimum_height=grid2.setter('height'))
             for text in text_list:
                 grid2.add_widget(
-                    WrappedLabel(text=text, color=(0, 0, 0, 1), size_hint=(1, None)))
+                    WrappedLabel(text=text, color=(0, 0, 0, 1), size_hint=(1, None), markup=True))
             grid.add_widget(grid2)
 
         '''text_list2 = [
