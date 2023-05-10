@@ -317,7 +317,7 @@
             Boton2:
                 text: 'Exportar resultados'
                 on_release:
-                    root.exportar_resultados()
+                    root.exportar_resultados(app.root.ids.jugarid.historial)
                     app.root.ids.jugarid.reset_parametros()
                     app.root.transition.direction = 'right'
                     app.root.current = 'MenuPrincipal'
@@ -499,3 +499,10 @@
                     icon_color: app.theme_cls.primary_color
                     on_release:
                         root.dismiss()
+
+<Popup_resultado>:
+    title_color: (0, 0, 0, 1)
+    title: 'RESULTADOS'
+    size_hint: (.6, .65)
+    background: '' # white
+

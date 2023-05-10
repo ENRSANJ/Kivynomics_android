@@ -9,6 +9,8 @@ from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.datatables import MDDataTable
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.gridlayout import GridLayout
 
 
 Builder.load_file('main.kv')
@@ -93,10 +95,56 @@ class SelectPlayer(MDDialog):
         self.referencia.inicio_juego()
 
 
+class Popup_resultado(Popup):
+    pass
+
+
 class ResetGame(MDDialog):
 
-    def exportar_resultados(self):
-        tabla = MDDataTable()
+    @staticmethod
+    def exportar_resultados(historial):
+        # Popup con Scrollview para mostrar el output
+        scroll = ScrollView()
+        popup = Popup_resultado(content=scroll)
+        grid = GridLayout(cols=1, size_hint=(1, None), padding='.5dp')
+        scroll.add_widget(grid)
+        grid.bind(minimum_height=grid.setter('height'))
+
+        for key, value in historial.items():
+            text_list = [
+                'ETAPA: ' + f'{key}',
+                'MODELO: ' + f'{value[0]}',
+                'Función de demanda del mercado: ' + f'p(X) = {value[1]} - {value[2]}X',
+                'Costes totales de la empresa 1: ' + f'{value[3]}x\u2081',
+                'Costes totales de la empresa 2: ' + f'{value[3]}x\u2082',
+                '',
+                'RESPUESTAS: ',
+                'Tu empresa: ',
+                'Producción: ' + f'{value[6]} uds',
+                'Beneficio: ' + f'{value[7]} €',
+                '',
+                'Empresa del NPC: ',
+                'Producción: ' + f'{value[8]} uds',
+                'Beneficio: ' + f'{value[9]} €',
+                '',
+                'Datos del mercado: ',
+                'Precio: ' + f'{value[4]}',
+                'Cantidad: ' + f'{value[5]}',
+            ]
+            for text in text_list:
+                grid.add_widget(
+                    WrappedLabel(text=text, color=(0, 0, 0, 1), font_size=grid.height * 0.022, size_hint=(1, None)))
+
+        text_list2 = [
+        'RESULTADOS GLOBALES:',
+        'Tu beneficio total: ' + f'{historial[1][7] + historial[2][7] + historial[3][7]} €',
+        'Beneficio total NPC: ' + f'{historial[1][9] + historial[2][9] + historial[3][9]} €'
+        ]
+        for text in text_list2:
+            grid.add_widget(
+                WrappedLabel(text=text, color=(0, 0, 0, 1), font_size=grid.height * 0.022, size_hint=(1, None)))
+
+        popup.open()
 
 
 class JugarVentana(VentanaLayout):
