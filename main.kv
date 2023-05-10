@@ -134,7 +134,7 @@
             # Tu decisión
             BoxLayout:
                 padding: '10dp'
-                size_hint: (.8, .2)
+                size_hint: (.8, .25)
                 canvas.before:
                     Color:
                         rgba: mainbtcolor
@@ -147,7 +147,7 @@
 
                 GameInput:
                     id: respuesta
-                    size_hint: (.5, 1)
+                    size_hint: (.6, 1)
                     pos_hint: {'center_x': .5, 'center_y': .5}
                     on_text_validate: root.confirma()
                     font_size: '16sp'
@@ -271,7 +271,7 @@
 
 
 <ResetGame>:
-    size_hint: (.3, .5)
+    size_hint: (.3, .65)
     auto_dismiss: False
 
     BoxLayout:
@@ -503,6 +503,6 @@
 <Popup_resultado>:
     title_color: (0, 0, 0, 1)
     title: 'RESULTADOS'
-    size_hint: (.6, .65)
+    size_hint: (.8, .65)
     background: '' # white
 

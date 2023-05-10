@@ -106,7 +106,7 @@ class ResetGame(MDDialog):
         # Popup con Scrollview para mostrar el output
         scroll = ScrollView()
         popup = Popup_resultado(content=scroll)
-        grid = GridLayout(cols=1, size_hint=(1, None), padding='.5dp')
+        grid = GridLayout(cols=3, size_hint=(1, None), padding='5dp')
         scroll.add_widget(grid)
         grid.bind(minimum_height=grid.setter('height'))
 
@@ -115,34 +115,38 @@ class ResetGame(MDDialog):
                 'ETAPA: ' + f'{key}',
                 'MODELO: ' + f'{value[0]}',
                 'Función de demanda del mercado: ' + f'p(X) = {value[1]} - {value[2]}X',
-                'Costes totales de la empresa 1: ' + f'{value[3]}x\u2081',
-                'Costes totales de la empresa 2: ' + f'{value[3]}x\u2082',
+                'CT_1: ' + f'{value[3]}x\u2081',
+                'CT_2: ' + f'{value[3]}x\u2082',
                 '',
                 'RESPUESTAS: ',
-                'Tu empresa: ',
+                'Tu empresa (1): ',
                 'Producción: ' + f'{value[6]} uds',
                 'Beneficio: ' + f'{value[7]} €',
                 '',
-                'Empresa del NPC: ',
+                'Empresa del NPC (2): ',
                 'Producción: ' + f'{value[8]} uds',
                 'Beneficio: ' + f'{value[9]} €',
                 '',
                 'Datos del mercado: ',
-                'Precio: ' + f'{value[4]}',
-                'Cantidad: ' + f'{value[5]}',
+                'Precio: ' + f'{value[4]} €',
+                'Cantidad: ' + f'{value[5]} uds',
             ]
-            for text in text_list:
-                grid.add_widget(
-                    WrappedLabel(text=text, color=(0, 0, 0, 1), font_size=grid.height * 0.022, size_hint=(1, None)))
 
-        text_list2 = [
+            grid2 = GridLayout(cols=1, size_hint=(1, None), padding='5dp')
+            grid2.bind(minimum_height=grid2.setter('height'))
+            for text in text_list:
+                grid2.add_widget(
+                    WrappedLabel(text=text, color=(0, 0, 0, 1), size_hint=(1, None)))
+            grid.add_widget(grid2)
+
+        '''text_list2 = [
         'RESULTADOS GLOBALES:',
         'Tu beneficio total: ' + f'{historial[1][7] + historial[2][7] + historial[3][7]} €',
         'Beneficio total NPC: ' + f'{historial[1][9] + historial[2][9] + historial[3][9]} €'
         ]
         for text in text_list2:
             grid.add_widget(
-                WrappedLabel(text=text, color=(0, 0, 0, 1), font_size=grid.height * 0.022, size_hint=(1, None)))
+                WrappedLabel(text=text, color=(0, 0, 0, 1), font_size=grid.height * 0.022, size_hint=(1, None)))'''
 
         popup.open()
 
