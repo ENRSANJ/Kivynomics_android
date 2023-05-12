@@ -67,7 +67,8 @@ class SelectPlayer(MDDialog):
 
     def selection1(self):
         self.referencia.player2 = NPCNash('johnnash.jpg',
-                                          ['"Lo que distingue lo real de lo irreal está en el corazón"',
+                                          ['''"[...]Pero, después de una vida de búsqueda me digo, ¿Qué es la lógica?\
+ ¿Quién decide la razón?"''',
                                            '''"Caballeros, debo recordarles que, mis probabilidades de éxito, aumentan\
  en cada nuevo intento"''',
                                            '"No, no creo en la suerte, pero sí en asignar valor a las cosas"'])
