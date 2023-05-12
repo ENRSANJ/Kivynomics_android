@@ -363,7 +363,11 @@ class NPCNash:
     # Seguidora
     @staticmethod
     def stackelberg2(a, b, c, x1):
-        return ((a - c) / (2 * b)) - (x1 / 2)
+        result = ((a - c) / (2 * b)) - (x1 / 2)
+        if result > 0:
+            return result
+        else:
+            return 0
 
     # Bertrand
     @staticmethod
@@ -394,8 +398,11 @@ class NPCMurray:
     # Seguidora
     @staticmethod
     def stackelberg2(a, b, c, x1):
-        return ((a - (c + NPCMurray.tax)) / (2 * b)) - (x1 / 2)
-
+        result = ((a - (c + NPCMurray.tax)) / (2 * b)) - (x1 / 2)
+        if result > 0:
+            return result
+        else:
+            return 0
     # Bertrand
     @staticmethod
     def bertrand(c):
@@ -421,8 +428,11 @@ class NPCMarx:
     # Seguidora
     @staticmethod
     def stackelberg2(a, b, c, x1):
-        return ((a - (1.2*c)) / (2 * b)) - (x1 / 2)
-
+        result = ((a - (1.2*c)) / (2 * b)) - (x1 / 2)
+        if result > 0:
+            return result
+        else:
+            return 0
     # Bertrand
     @staticmethod
     def bertrand(c):
