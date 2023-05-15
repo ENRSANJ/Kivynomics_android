@@ -120,7 +120,7 @@ class ResetGame(MDDialog):
                 'CT[sub]1[/sub]: ' + f'{value[3]}x[sub]1[/sub]',
                 'CT[sub]2[/sub]: ' + f'{value[3]}x[sub]2[/sub]',
                 '\n[u]RESPUESTAS:[/u] ',
-                '[u]Tu empresa:[/u] ',
+                '\n[u]Tu empresa:[/u] ',
                 'Producción: ' + f'{value[6]} uds',
                 'Beneficio: ' + f'{value[7]} €',
                 '\n[u]Empresa del NPC:[/u] ',
@@ -250,7 +250,7 @@ class JugarVentana(VentanaLayout):
         if self.evento == 1:
             self.narrativa = '''Recientemente se publicaron los resultados de un estudio llevado a cabo por la\
  universidad de Massachusetts que resaltan los beneficios del uso de tu producto. Esto ha producido un aumento\
- de la demanda de mercado.'''
+ de la demanda de mercado. Los cambios se han registrado en la función de demanda.'''
             self.a = self.a + cuantia
 
         elif self.evento == 2:
@@ -491,6 +491,8 @@ Cabe recordar que el enfrentamiento con el ordenador no es siempre rigurosamente
 A lo largo del juego deberás decidir la cantidad a producir (modelos de Cournot y Stackelberg) o el precio que vas\
  a establecer (modelo de Bertrand) teniendo en cuenta la personalidad del NPC, el modelo a tratar en la etapa y, por\
  supuesto, las funciones de demanda del mercado y costes totales.
+
+Al final de la partida podrás ver los resultados obtenidos por etapa.
 '''
 
 

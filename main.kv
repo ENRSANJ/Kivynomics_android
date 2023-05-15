@@ -147,7 +147,7 @@
 
                 GameInput:
                     id: respuesta
-                    size_hint: (.6, 1)
+                    size_hint: (.75, 1)
                     pos_hint: {'center_x': .5, 'center_y': .5}
                     on_text_validate: root.confirma()
                     font_size: '16sp'
@@ -188,7 +188,7 @@
             WrappedLabel:
                 size_hint_y: None
                 height: self.texture_size[1]
-                font_size: '13sp'
+                font_size: '12sp'
                 text: root.comentario
 
             # Historial
@@ -209,7 +209,7 @@
 
 
 <SelectPlayer>:
-    size_hint: (.65, .8)
+    size_hint: (.65, .9)
     auto_dismiss: False
 
     BoxLayout:
@@ -422,7 +422,7 @@
                 text: 'Github source code'
                 on_release:
                     import webbrowser
-                    webbrowser.open('https://github.com/ENRSANJ/Kivynomics.git')
+                    webbrowser.open('https://github.com/ENRSANJ')
         Boton2:
             text: 'Menú Principal'
             on_release: app.root.transition.direction= 'right'; app.root.current = 'MenuPrincipal'
@@ -501,9 +501,9 @@
                     on_release:
                         root.dismiss()
 
+
 <Popup_resultado>:
     title_color: (0, 0, 0, 1)
     title: 'RESULTADOS'
     size_hint: (.8, .65)
     background: '' # white
-
