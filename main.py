@@ -162,6 +162,7 @@ class JugarVentana(VentanaLayout):
     historial = {}
     model = 0
     precio2 = 0
+    modelos = {1: 'COURNOT', 2: 'STACKELBERG (NPC=líder)', 3: 'STACKELBERG (NPC=seguidora)', 4: 'BERTRAND'}
 
     # Asignamos valores aleatorios al inicio del juego
     a = 0
@@ -323,7 +324,7 @@ class JugarVentana(VentanaLayout):
         self.beneficio2 = round((self.precio - self.c) * self.prod2, 3)
 
         # Rellenamos el historial
-        self.historial[self.stage] = [self.model, self.a, self.b, self.c, self.precio, self.cantidad_total,
+        self.historial[self.stage] = [self.modelos.get(self.model, self.model), self.a, self.b, self.c, self.precio, self.cantidad_total,
                                       self.prod1, self.beneficio1, self.prod2, self.beneficio2]
 
         stage_dict = {1: 'stage1', 2: 'stage2', 3: 'stage3'}
