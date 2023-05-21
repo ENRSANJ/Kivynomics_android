@@ -211,7 +211,7 @@
 <SelectPlayer>:
     size_hint: (.65, .9)
     auto_dismiss: False
-
+    title: 'Selecciona tu rival'
     BoxLayout:
         padding: ('5dp', '5dp', '15dp', 0)
         orientation: "vertical"
@@ -222,14 +222,6 @@
             RoundedRectangle:
                 size: self.size
                 pos: self.pos
-
-        # Título
-        BoxLayout:
-            size_hint: (1, .1)
-            WrappedLabel:
-                text: '[u]Selecciona tu rival[/u]'
-                font_size: '16sp'
-                markup: True
 
         BoxLayout:
 
@@ -273,6 +265,7 @@
 <ResetGame>:
     size_hint: (.3, .65)
     auto_dismiss: False
+    title: 'El juego ha finalizado'
 
     BoxLayout:
         padding: '10dp'
@@ -284,14 +277,6 @@
             RoundedRectangle:
                 size: self.size
                 pos: self.pos
-
-        # Título
-        BoxLayout:
-            size_hint: (1, .1)
-            WrappedLabel:
-                text: '[u]El juego ha finalizado[/u]'
-                font_size: '16sp'
-                markup: True
 
         # Selección de acción al terminar la partida
         BoxLayout:
@@ -396,21 +381,36 @@
     name: 'About'
 
     GridLayout:
+        size_hint: (1, 1)
+        cols: 1
+        spacing: '10dp'
+        padding: '10dp'
         canvas.before:
             Color:
                 rgba: mainbtcolor
             Rectangle:
                 size: self.size
                 pos: self.pos
-        cols: 1
-        padding: '10dp'
-        spacing: '10dp'
 
-        WrappedLabel:
+        ScrollView:
             size_hint: (1, 3)
-            bold: True
-            halign: 'justify'
-            text: root.a
+            pos_hint: {'top': 1}
+            cols: 1
+            padding: '10dp'
+            spacing: '10dp'
+
+            GridLayout:
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height + 50
+                spacing: '10dp'
+                padding: '10dp'
+                WrappedLabel:
+                    size_hint_y: None
+                    bold: True
+                    halign: 'justify'
+                    text: root.a
+
         BoxLayout:
             spacing: '10dp'
             Boton2:
@@ -458,11 +458,12 @@
 
 # Pantalla de confirmación
 <ConfirmationScreen>:
-    size_hint: (.3, .3)
+    size_hint: (.3, .5)
     auto_dismiss: False
+    title: '¿Desea reiniciar la partida?'
     BoxLayout:
-        spacing: '10dp'
-        padding: '10dp'
+        spacing: '5dp'
+        padding: '5dp'
         orientation: 'vertical'
         canvas.before:
             Color:
@@ -470,34 +471,28 @@
             RoundedRectangle:
                 size: self.size
                 pos: self.pos
-        # Título
-        BoxLayout:
-            size_hint: (1, .2)
-            WrappedLabel:
-                text: '¿Desea reiniciar la partida?'
+
         # Selección de opción
         AnchorLayout:
             anchor_x: 'center'
             anchor_y: 'bottom'
-            spacing: '10dp'
             padding: '10dp'
 
             BoxLayout:
+                spacing: '15dp'
                 orientation: 'horizontal'
                 size_hint: (None, None)
                 size: (self.minimum_width, self.minimum_height)
 
-                MDIconButton:
-                    icon: 'check-circle-outline'
-                    icon_color: app.theme_cls.primary_color
+                Boton2:
+                    text: 'Sí'
                     on_release:
                         app.root.ids.jugarid.reset_parametros()
                         app.root.ids.jugarid.on_enter()
                         root.dismiss()
 
-                MDIconButton:
-                    icon: 'close-circle-outline'
-                    icon_color: app.theme_cls.primary_color
+                Boton2:
+                    text: 'No'
                     on_release:
                         root.dismiss()
 

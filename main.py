@@ -7,7 +7,7 @@ from kivy.uix.label import Label
 import random
 from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
-from kivymd.uix.dialog import MDDialog
+#from kivymd.uix.dialog import MDDialog
 from kivymd.uix.datatables import MDDataTable
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
@@ -45,7 +45,7 @@ class WrappedLabel(Label):
             texture_size=lambda *x: self.setter('height')(self, self.texture_size[1]))
 
 
-class ConfirmationScreen(MDDialog):
+class ConfirmationScreen(Popup):
     pass
 
 
@@ -59,7 +59,7 @@ class MenuPrincipal(Screen):
     pass
 
 
-class SelectPlayer(MDDialog):
+class SelectPlayer(Popup):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -100,7 +100,7 @@ class Popup_resultado(Popup):
     pass
 
 
-class ResetGame(MDDialog):
+class ResetGame(Popup):
 
     @staticmethod
     def exportar_resultados(historial):
@@ -443,7 +443,7 @@ class NPCMarx:
 
 class About(Screen):
     a = '''Esta aplicación es parte de otra aplicación más grande, también desarrollada en Kivy pero orientada a\
- ordenadores. Ambas son el resultado de un Trabajo de Tin de Grado en economía centrado\
+ ordenadores. Ambas son el resultado de un Trabajo de Fin de Grado en economía centrado\
  en la teoría de juegos. La aplicación de escritorio implementa los modelos de teoría de juegos fundamentales\
  en sus versiones más básicas, con el fin de ofrecer una aproximación accesible, comprensible y entretenida\
  a la materia. Para más información sobre los modelos y su implementación concreta, puedes\
