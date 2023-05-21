@@ -211,7 +211,7 @@
 <SelectPlayer>:
     size_hint: (.65, .9)
     auto_dismiss: False
-    title: 'Selecciona tu rival'
+
     BoxLayout:
         padding: ('5dp', '5dp', '15dp', 0)
         orientation: "vertical"
@@ -222,6 +222,14 @@
             RoundedRectangle:
                 size: self.size
                 pos: self.pos
+
+        # Título
+        BoxLayout:
+            size_hint: (1, .1)
+            WrappedLabel:
+                text: '[u]Selecciona tu rival[/u]'
+                font_size: '16sp'
+                markup: True
 
         BoxLayout:
 
@@ -265,7 +273,6 @@
 <ResetGame>:
     size_hint: (.3, .65)
     auto_dismiss: False
-    title: 'El juego ha finalizado'
 
     BoxLayout:
         padding: '10dp'
@@ -277,6 +284,14 @@
             RoundedRectangle:
                 size: self.size
                 pos: self.pos
+
+        # Título
+        BoxLayout:
+            size_hint: (1, .1)
+            WrappedLabel:
+                text: '[u]El juego ha finalizado[/u]'
+                font_size: '16sp'
+                markup: True
 
         # Selección de acción al terminar la partida
         BoxLayout:
@@ -458,12 +473,11 @@
 
 # Pantalla de confirmación
 <ConfirmationScreen>:
-    size_hint: (.3, .5)
+    size_hint: (.3, .3)
     auto_dismiss: False
-    title: '¿Desea reiniciar la partida?'
     BoxLayout:
-        spacing: '5dp'
-        padding: '5dp'
+        spacing: '10dp'
+        padding: '10dp'
         orientation: 'vertical'
         canvas.before:
             Color:
@@ -471,28 +485,34 @@
             RoundedRectangle:
                 size: self.size
                 pos: self.pos
-
+        # Título
+        BoxLayout:
+            size_hint: (1, .2)
+            WrappedLabel:
+                text: '¿Desea reiniciar la partida?'
         # Selección de opción
         AnchorLayout:
             anchor_x: 'center'
             anchor_y: 'bottom'
+            spacing: '10dp'
             padding: '10dp'
 
             BoxLayout:
-                spacing: '15dp'
                 orientation: 'horizontal'
                 size_hint: (None, None)
                 size: (self.minimum_width, self.minimum_height)
 
-                Boton2:
-                    text: 'Sí'
+                MDIconButton:
+                    icon: 'check-circle-outline'
+                    icon_color: app.theme_cls.primary_color
                     on_release:
                         app.root.ids.jugarid.reset_parametros()
                         app.root.ids.jugarid.on_enter()
                         root.dismiss()
 
-                Boton2:
-                    text: 'No'
+                MDIconButton:
+                    icon: 'close-circle-outline'
+                    icon_color: app.theme_cls.primary_color
                     on_release:
                         root.dismiss()
 

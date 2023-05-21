@@ -7,7 +7,7 @@ from kivy.uix.label import Label
 import random
 from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
-#from kivymd.uix.dialog import MDDialog
+from kivymd.uix.dialog import MDDialog
 from kivymd.uix.datatables import MDDataTable
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
@@ -45,7 +45,7 @@ class WrappedLabel(Label):
             texture_size=lambda *x: self.setter('height')(self, self.texture_size[1]))
 
 
-class ConfirmationScreen(Popup):
+class ConfirmationScreen(MDDialog):
     pass
 
 
@@ -59,7 +59,7 @@ class MenuPrincipal(Screen):
     pass
 
 
-class SelectPlayer(Popup):
+class SelectPlayer(MDDialog):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -100,7 +100,7 @@ class Popup_resultado(Popup):
     pass
 
 
-class ResetGame(Popup):
+class ResetGame(MDDialog):
 
     @staticmethod
     def exportar_resultados(historial):
